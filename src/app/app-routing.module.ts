@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { JobVacancyComponent } from './job-vacancy/job-vacancy.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: JobVacancyComponent
+  }
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+export class AppRoutingModule { }
