@@ -4,22 +4,23 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const api = require('./config/route');
 const models = require('./models');
+const encryption = require('./utilities/encryption');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/api', api);
-console.log('The environment is ', __dirname);
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join('..', __dirname, 'dist/index.html'));
+  res.sendFile(path.join( __dirname,'../', 'dist/index.html'));
 });
 
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
 const server = http.createServer(app);
-console.log('The sequelize is ', models.sequelize);
+
 server.on('close', () => {
   models.sequelize.close();
 });
@@ -27,7 +28,11 @@ models.sequelize.sync({
   force: true
 })
   .then(function(schema) {
-    models.User
+    // Table created
+    var salt1 = encryption.createSalt();
+    var salt2 = encryption.createSalt();
+    var salt3 = encryption.createSalt();
+    return models.User
       .bulkCreate([
         {
           FirstName: 'Masud',
@@ -73,7 +78,7 @@ models.sequelize.sync({
 
       ])
       .then(function() {
-        return models.User.findAll();
+        //return models.User.findAll();
       })
       .then(function(users) {
         console.log('the users here')

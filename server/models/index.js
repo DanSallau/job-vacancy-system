@@ -19,7 +19,6 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
   },
 });
 
-console.log('The config is ', config);
 var db = {};
 
 fs

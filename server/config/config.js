@@ -7,8 +7,8 @@ module.exports = {
         port: process.env.PORT || 3030,
         username: "nuru",
         password: 'XY3f8FlsD4oL',
-        database: "nairamarketdb",
-        dbPort: 5432,
+        database: "hantsitvforum_db",
+        dbPort: 5433,
         dialect: "postgres"
 
     },

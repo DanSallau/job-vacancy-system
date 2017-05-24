@@ -23,8 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         Company: {
             type: DataTypes.STRING,
             field: 'company',
-            allowNull: false,
-            unique: true
+            allowNull: false
         },
         Active: {
             type: DataTypes.BOOLEAN,
