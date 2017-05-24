@@ -20,6 +20,12 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             unique: true
         },
+        Company: {
+            type: DataTypes.STRING,
+            field: 'company',
+            allowNull: false,
+            unique: true
+        },
         Active: {
             type: DataTypes.BOOLEAN,
             field: 'active',

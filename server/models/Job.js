@@ -1,47 +1,21 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Ad = sequelize.define("Job", {
+    var Job = sequelize.define("Job", {
         Title: {
             type: DataTypes.STRING,
             field: 'title',
             allowNull: false
         },
-        MarketPrice: {
+        JobSpecification: {
+            type: DataTypes.TEXT,
+            field: 'job_specification',
+            allowNull: false
+        },
+        JobLocation: {
             type: DataTypes.DECIMAL,
-            field: 'market_price',
-            allowNull: true
-        },
-        SellingPrice: {
-            type: DataTypes.DECIMAL,
-            field: 'selling_price',
+            field: 'job_specification',
             allowNull: false
-        },
-        Negotiable: {
-            type: DataTypes.BOOLEAN,
-            field: 'negotiable',
-            allowNull: false
-        },
-        Condition:  {
-            type: DataTypes.STRING,
-            field: 'condition',
-            allowNull: false
-        },
-        Description:  {
-            type: DataTypes.STRING,
-            field: 'description',
-            allowNull: false
-        },
-        State:  {
-            type: DataTypes.STRING,
-            field: 'state',
-            allowNull: false
-        },
-        Currency: {
-            type: DataTypes.CHAR,
-            field: 'currency',
-            allowNull: false,
-            defaultValue: 'N'
         },
         ModifiedOn: {
             type: DataTypes.DATE, 
@@ -54,9 +28,9 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: sequelize.fn('NOW')
         },
-        Featured: {
+        FeaturedJob: {
             type: DataTypes.BOOLEAN, 
-            field: "featured_ad", 
+            field: "featured_job", 
             allowNull: false,
             defaultValue: false
         },
@@ -74,20 +48,7 @@ module.exports = function(sequelize, DataTypes) {
                     foreignKey: {
                         allowNull: false
                     }
-                }),
-                Job.belongsTo(models.Category, {
-                    onDelete: "CASCADE",
-                    foreignKey: {
-                        allowNull: false
-                    }
-                }),
-                Job.belongsTo(models.CategoryItem, {
-                    onDelete: "CASCADE",
-                    foreignKey: {
-                        allowNull: false
-                    }
-                }),
-                Job.hasMany(models.AdItem)
+                })
             }
         }
     });
