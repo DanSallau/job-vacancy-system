@@ -1,3 +1,5 @@
+ 'use strict;' 
+
 const express = require('express');
 const path = require('path');
 const http = require('http');
@@ -9,7 +11,7 @@ const encryption = require('./utilities/encryption');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, '../','dist')));
 app.use('/api', api);
 
 app.get('*', (req, res) => {
