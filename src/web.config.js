@@ -1,5 +1,5 @@
 var APP_CONFIG = {
-    APPLICATION: 'ezsupport-ui',
+    APPLICATION: 'Job-Vacancy_App',
     ENVIRONMENT: 'local',
     PAGE_SIZE: 10,
     PAGE_SIZE_MAX: 100,
