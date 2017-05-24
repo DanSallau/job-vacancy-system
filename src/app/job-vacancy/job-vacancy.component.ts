@@ -8,7 +8,7 @@ import { ServiceBase } from '../shared/service.base';
 })
 
 export class JobVacancyComponent implements OnInit {
-        name = 'JobVanacancy';
+      
         constructor(private service: ServiceBase) { }
 
         ngOnInit() {
