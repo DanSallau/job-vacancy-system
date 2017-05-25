@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         JobLocation: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.STRING,
             field: 'job_specification',
             allowNull: false
         },
@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Job.belongsTo(models.User, {
+                Job.belongsTo(models.Employer, {
                     onDelete: "CASCADE",
                     foreignKey: {
                         allowNull: false

@@ -8,11 +8,17 @@ import { ServiceBase } from '../shared/service.base';
 })
 
 export class JobVacancyComponent implements OnInit {
-      
+
         constructor(private service: ServiceBase) { }
 
         ngOnInit() {
-                console.log('Loading app here ');
+                this.service
+                        .getAllVacancies()
+                        .subscribe(x => {
+                                console.log('Loading app here ', x);
+                        }, err => {
+
+                        })
         }
-        
+
 }

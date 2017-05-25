@@ -1,4 +1,4 @@
- 'use strict;' 
+'use strict;'
 
 const express = require('express');
 const path = require('path');
@@ -11,11 +11,11 @@ const encryption = require('./utilities/encryption');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../','dist')));
+app.use(express.static(path.join(__dirname, '../', 'dist')));
 app.use('/api', api);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join( __dirname,'../', 'dist/index.html'));
+  res.sendFile(path.join(__dirname, '../', 'dist/index.html'));
 });
 
 const port = process.env.PORT || '3000';
@@ -34,7 +34,7 @@ models.sequelize.sync({
     var salt1 = encryption.createSalt();
     var salt2 = encryption.createSalt();
     var salt3 = encryption.createSalt();
-    return models.User
+    return models.Employer
       .bulkCreate([
         {
           FirstName: 'Masud',
@@ -80,10 +80,40 @@ models.sequelize.sync({
 
       ])
       .then(function() {
-        //return models.User.findAll();
+        return models.Employer.findOne();
       })
-      .then(function(users) {
+      .then(function(employer) {
         console.log('the users here')
+        if (employer) {
+          models.Job
+            .bulkCreate([
+              {
+                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobLocation: 'Selangor',
+                FeaturedJob: true
+              },
+              {
+                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobLocation: 'Selangor',
+                FeaturedJob: true
+              },
+              {
+                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobLocation: 'Selangor',
+                FeaturedJob: true
+              },
+              {
+                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                JobLocation: 'Selangor',
+                FeaturedJob: true
+              }
+            ])
+            .catch(err => console.log(err))
+        }
       })
       .catch(function(err) {
         console.log('the first error is', err);

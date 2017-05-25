@@ -4,5 +4,5 @@ var APP_CONFIG = {
     PAGE_SIZE: 10,
     PAGE_SIZE_MAX: 100,
     MOCK: true,
-    API_URL: 'http://localhost:5001/'
+    API_URL: 'http://localhost:3000'
 };
