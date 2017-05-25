@@ -18,6 +18,8 @@
         "styles.scss"
       ],
       "scripts": [
+        "../node_modules/zone.js/dist/zone.js",
+        "../node_modules/reflect-metadata/Reflect.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
@@ -41,5 +43,8 @@
   "defaults": {
     "styleExt": "scss",
     "prefixInterfaces": false
-  }
+  },
+  "assets": [
+    "src/assets"
+  ]
 }
