@@ -17,6 +17,18 @@ module.exports = function(sequelize, DataTypes) {
             field: 'job_specification',
             allowNull: false
         },
+        OfferRelocation: {
+            type: DataTypes.BOOLEAN,
+            field: 'offer_relocation',
+            allowNull: false,
+            defaultValue: false
+        },
+        JobType: {
+            type: DataTypes.STRING,
+            field: 'job_type',
+            allowNull: false,
+            defaultValue: 'Permanent'
+        },
         ModifiedOn: {
             type: DataTypes.DATE, 
             field: "modified_on", 
