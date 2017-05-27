@@ -55,7 +55,8 @@ module.exports = {
             Salt: salt1,
             Token: encryption.getToken(),
             Contact: '0102443167',
-            Address: 'xxxxxxxx'
+            Address: 'xxxxxxxx',
+            ReceiveAlert: true
         },
         {
             FirstName: 'Nuru',
@@ -69,7 +70,8 @@ module.exports = {
             Role: 'admin',
             Token: encryption.getToken(),
             Contact: '0102443167',
-            Address: 'xxxxxxxx'
+            Address: 'xxxxxxxx',
+            ReceiveAlert: true
         },
         {
             FirstName: 'Siraj',

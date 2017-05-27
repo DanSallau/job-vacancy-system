@@ -102,6 +102,12 @@ module.exports = function(sequelize, DataTypes) {
       field: "profile_picture",
       allowNull: true,
       defaultValue: 'https://s3-us-west-2.amazonaws.com/nairamarketprofile/default.jpeg'
+    },
+    ReceiveAlert:{
+      type: DataTypes.BOOLEAN,
+      field: 'receive_alert',
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     classMethods: {
