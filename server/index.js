@@ -6,8 +6,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const api = require('./config/route');
 const models = require('./models');
-const encryption = require('./utilities/encryption');
-
+const bulkData = require('./config/bulkCreate');
 const app = express();
 
 app.use(bodyParser.json());
@@ -31,99 +30,15 @@ models.sequelize.sync({
 })
   .then(function(schema) {
     // Table created
-    var salt1 = encryption.createSalt();
-    var salt2 = encryption.createSalt();
-    var salt3 = encryption.createSalt();
     return models.Employer
-      .bulkCreate([
-        {
-          FirstName: 'Masud',
-          LastName: 'Salihu',
-          Username: 'masud',
-          Company: 'Ezypay Pty Ltd',
-          active: true,
-          Email: 'masud@yahoo.com',
-          PassHash: encryption.hashPwd(salt1, 'password123'),
-          Salt: salt1,
-          Token: encryption.getToken(),
-          Contact: '0102443167',
-          Address: 'xxxxxxxx'
-        },
-        {
-          FirstName: 'Nuru',
-          LastName: 'Salihu',
-          Username: 'nuru',
-          Company: 'CCCC Pty Ltd',
-          Active: false,
-          Email: 'nuruddeensalihu@yahoo.com',
-          PassHash: encryption.hashPwd(salt2, 'password123'),
-          Salt: salt2,
-          Role: 'admin',
-          Token: encryption.getToken(),
-          Contact: '0102443167',
-          Address: 'xxxxxxxx'
-        },
-        {
-          FirstName: 'Siraj',
-          LastName: 'Salihu',
-          Username: 'siraj',
-          Company: 'CCCC Pty Ltd',
-          Active: true,
-          Email: 'siraj@yahoo.com',
-          PassHash: encryption.hashPwd(salt3, 'password123'),
-          Salt: salt3,
-          Role: 'premium',
-          Token: encryption.getToken(),
-          Contact: '0102443167',
-          Address: 'xxxxxxxx'
-        }
-
-      ])
+      .bulkCreate(bulkData['employer'])
       .then(function() {
         return models.Employer.findOne();
       })
       .then(function(employer) {
-        console.log('the users here')
         if (employer) {
           models.Job
-            .bulkCreate([
-              {
-                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobLocation: 'CyberJaya',
-                OfferRelocation: true,
-                JobTags: 'Software Engineer, Front End',
-                JobType: 'Permanent',
-                FeaturedJob: true
-              },
-              {
-                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobLocation: 'Selangor',
-                OfferRelocation: true,
-                JobTags: 'Software Engineer, Front End',
-                JobType: 'Permanent',
-                FeaturedJob: true
-              },
-              {
-                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobLocation: 'Selangor',
-                OfferRelocation: true,
-                JobTags: 'Software Engineer, Front End',
-                JobType: 'Permanent',
-                FeaturedJob: true
-              },
-              {
-                Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                OfferRelocation: true,
-                JobTags: 'Software Engineer, Front End',
-                JobType: 'Permanent',
-                JobLocation: 'Selangor',
-                FeaturedJob: true
-              }
-            ])
+            .bulkCreate(bulkData['job'])
             .catch(err => console.log(err))
         }
       })
