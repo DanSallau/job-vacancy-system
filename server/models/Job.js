@@ -23,6 +23,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: false
         },
+        JobTags: {
+            type: DataTypes.STRING,
+            field: 'job_tags',
+            allowNull: false
+        },
         JobType: {
             type: DataTypes.STRING,
             field: 'job_type',

@@ -90,24 +90,36 @@ models.sequelize.sync({
               {
                 Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
-                JobLocation: 'Selangor',
+                JobLocation: 'CyberJaya',
+                OfferRelocation: true,
+                JobTags: 'Software Engineer, Front End',
+                JobType: 'Permanent',
                 FeaturedJob: true
               },
               {
                 Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobLocation: 'Selangor',
+                OfferRelocation: true,
+                JobTags: 'Software Engineer, Front End',
+                JobType: 'Permanent',
                 FeaturedJob: true
               },
               {
                 Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobLocation: 'Selangor',
+                OfferRelocation: true,
+                JobTags: 'Software Engineer, Front End',
+                JobType: 'Permanent',
                 FeaturedJob: true
               },
               {
                 Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
                 JobSpecification: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
+                OfferRelocation: true,
+                JobTags: 'Software Engineer, Front End',
+                JobType: 'Permanent',
                 JobLocation: 'Selangor',
                 FeaturedJob: true
               }

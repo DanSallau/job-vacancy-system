@@ -36,11 +36,6 @@ module.exports = function(sequelize, DataTypes) {
       field: "last_active",
       allowNull: true,
     },
-    RecentActive: {
-      type: DataTypes.DATE,
-      field: "recent_active",
-      allowNull: true,
-    },
     Block: {
       type: DataTypes.BOOLEAN,
       field: 'block',
