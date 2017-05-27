@@ -12,7 +12,7 @@ exports.getAllVacancies = function (req, res) {
     })
     .catch((err) => {
       res.status(400);
-      return res.send(err);
+      res.end();
     });
 };
 
@@ -29,7 +29,7 @@ exports.getFeaturedVacancies = function (req, res) {
     })
     .catch((err) => {
       res.status(400);
-      return res.end(err);
+      res.end();
     });
 };
 
@@ -48,7 +48,7 @@ exports.createVacancy = function (req, res) {
       res.status(200).json({ success: true });
       res.end();
     })
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(400));
 };
 
 exports.updateVacancy = function (req, res) {
@@ -74,5 +74,24 @@ exports.updateVacancy = function (req, res) {
         return res.status(200).json(job);
       }
     })
-    .catch(err => res.status(400).json(err))
+    .catch(err => res.status(400))
+};
+
+exports.deleteVacancy = function (req, res) {
+  models.Job.destroy({
+    Where: {
+      id: req.params.id
+    }
+  })
+    .then(function (rowDelete) {
+      if (rowDelete === 1) {
+        models.Job.findAll({
+          order: [['CreatedOn', 'DESC']]
+        }).then(jobs => res.status(200).json(users))
+      } else {
+        res.status(403);
+        res.end();
+      }
+    })
+    .catch(err => res.status(400))
 }
