@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceBase } from '../shared/service.base';
+import { ApiService } from '../shared/api.service';
+import { IJob } from '../shared/api.interface';
 
 @Component({
         selector: 'job-vacancy',
@@ -8,13 +9,14 @@ import { ServiceBase } from '../shared/service.base';
 })
 
 export class JobVacancyComponent implements OnInit {
-
-        constructor(private service: ServiceBase) { }
+        jobs: Array<IJob> = [];
+        constructor(private service: ApiService) { }
 
         ngOnInit() {
                 this.service
                         .getAllVacancies()
-                        .subscribe(x => {
+                        .subscribe((x) => {
+                                this.jobs = x;
                                 console.log('Loading app here ', x);
                         }, err => {
 
