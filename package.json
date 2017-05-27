@@ -7,7 +7,8 @@
   "scripts": {
     "start-dev": "npm run copy-dev-web-config && npm run start",
     "copy-dev-web-config": "cpx web.config.js src",
-    "start": "ng build && node ./server",
+    "start": "ng build --watch",
+    "server": "node ./server",
     "predeploy": "npm run build",
     "deploy": "cpx dist/**/*.{html,css,js,png,jpg,json,ttf,woff,woff2,svg} ../resources/static/",
     "build": "ng build -prod",

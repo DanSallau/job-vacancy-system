@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         JobLocation: {
             type: DataTypes.STRING,
-            field: 'job_specification',
+            field: 'job_location',
             allowNull: false
         },
         OfferRelocation: {

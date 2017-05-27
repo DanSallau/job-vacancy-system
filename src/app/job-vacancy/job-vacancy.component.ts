@@ -17,10 +17,13 @@ export class JobVacancyComponent implements OnInit {
                         .getAllVacancies()
                         .subscribe((x) => {
                                 this.jobs = x;
-                                console.log('Loading app here ', x);
                         }, err => {
 
                         })
+        }
+
+        addJob(e) {
+                e.preventDefault();
         }
 
 }

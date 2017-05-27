@@ -1,17 +1,5 @@
 const models = require('../models');
 
-exports.getVacancyById - function(req, res) {
-  models.Job.findOne({
-    Where:{
-      id: req.params.id
-    }
-  })
-  .then(function(job) {
-    return res.status(200).json()
-  })
-  .catch(err => res.status(400))
-};
- 
 exports.getAllVacancies = function (req, res) {
   models.Job
     .findAll({
@@ -105,4 +93,18 @@ exports.deleteVacancy = function (req, res) {
       }
     })
     .catch(err => res.status(400))
-}
+};
+
+exports.getVacancyById = function(req, res) {
+  models.Job.findOne({
+    Where:{
+      id: req.params.id
+    }
+  })
+  .then(function(job) {
+    return res.status(200).json()
+  })
+  .catch(err => res.status(400))
+};
+ 
+
