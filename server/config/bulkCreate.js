@@ -4,7 +4,8 @@ const salt1 = encryption.createSalt();
 const salt2 = encryption.createSalt();
 const salt3 = encryption.createSalt();
 
-module.exports = {
+module.exports = function(id){
+    return {
     job: [
         {
             Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
@@ -13,7 +14,8 @@ module.exports = {
             OfferRelocation: true,
             JobTags: 'Software Engineer, Front End',
             JobType: 'Permanent',
-            FeaturedJob: true
+            FeaturedJob: true,
+            EmployerId:id
         },
         {
             Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
@@ -22,7 +24,8 @@ module.exports = {
             OfferRelocation: true,
             JobTags: 'Software Engineer, Front End',
             JobType: 'Permanent',
-            FeaturedJob: true
+            FeaturedJob: true,
+            EmployerId:id
         },
         {
             Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
@@ -31,7 +34,8 @@ module.exports = {
             OfferRelocation: true,
             JobTags: 'Software Engineer, Front End',
             JobType: 'Permanent',
-            FeaturedJob: true
+            FeaturedJob: true,
+            EmployerId:id
         },
         {
             Title: 'Typescript Reflect.getMetadata design:type returns Object instead of Date without angular testbed',
@@ -40,7 +44,8 @@ module.exports = {
             JobTags: 'Software Engineer, Front End',
             JobType: 'Permanent',
             JobLocation: 'Selangor',
-            FeaturedJob: true
+            FeaturedJob: true,
+            EmployerId:id
         }
     ],
     employer: [
@@ -89,5 +94,5 @@ module.exports = {
         }
 
     ]
-
+    }
 }

@@ -10,5 +10,19 @@ export interface IJob {
     ModifiedOn: Date,
     CreatedOn: Date,
     FeaturedJob: boolean,
-    Active: boolean
+    Active: boolean,
+    Employer: IEmployer
+}
+
+export interface IEmployer {
+    id: number,
+    FirstName: string,
+    LastName: string,
+    Username: string,
+    Company: string,
+    Active: boolean,
+    LastActive: Date,
+    Block: boolean,
+    Email: string,
+    Contact: string
 }

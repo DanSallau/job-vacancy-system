@@ -31,14 +31,14 @@ models.sequelize.sync({
   .then(function(schema) {
     // Table created
     return models.Employer
-      .bulkCreate(bulkData['employer'])
+      .bulkCreate(bulkData(1)['employer'])
       .then(function() {
         return models.Employer.findOne();
       })
       .then(function(employer) {
         if (employer) {
           models.Job
-            .bulkCreate(bulkData['job'])
+            .bulkCreate(bulkData(employer.id)['job'])
             .catch(err => console.log(err))
         }
       })

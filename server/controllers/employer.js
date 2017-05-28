@@ -11,6 +11,7 @@ exports.getAllVacancies = function (req, res) {
       res.end();
     })
     .catch((err) => {
+      console.log(err);
       res.status(400);
       res.end();
     });

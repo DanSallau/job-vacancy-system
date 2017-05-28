@@ -3,13 +3,15 @@ const models = require('../models');
 exports.getAllVacancies = function (req, res) {
   models.Job
     .findAll({
+      include: [{ model: models.Employer}],
       order: [['CreatedOn', 'DESC']]
     })
     .then(function (collection) {
-      res.status(200).json(collection);
+      res.status(200).json(collection); 
       res.end();
     })
     .catch((err) => {
+      console.log(err);
       res.status(400);
       res.end();
     });
@@ -17,6 +19,7 @@ exports.getAllVacancies = function (req, res) {
 
 exports.getFeaturedVacancies = function (req, res) {
   models.Job.findAll({
+    include: [{ model: models.Employer}],
     where: {
       FeaturedJob: true,
       order: [['CreatedOn', 'DESC']]
@@ -86,7 +89,7 @@ exports.deleteVacancy = function (req, res) {
       if (rowDelete === 1) {
         models.Job.findAll({
           order: [['CreatedOn', 'DESC']]
-        }).then(jobs => res.status(200).json(users))
+        }).then(jobs => res.status(200).json(Employers))
       } else {
         res.status(403);
         res.end();
@@ -97,6 +100,7 @@ exports.deleteVacancy = function (req, res) {
 
 exports.getVacancyById = function(req, res) {
   models.Job.findOne({
+    include: [{ model: models.Employer}],
     Where:{
       id: req.params.id
     }

@@ -22,8 +22,4 @@ export class JobVacancyComponent implements OnInit {
                         })
         }
 
-        addJob(e) {
-                e.preventDefault();
-        }
-
 }
