@@ -10,16 +10,24 @@ import { IJob } from '../shared/api.interface';
 
 export class JobVacancyComponent implements OnInit {
         jobs: Array<IJob> = [];
+        limit : number;
+
         constructor(private service: ApiService) { }
 
         ngOnInit() {
+                this.limit = 3;
                 this.service
                         .getAllVacancies()
                         .subscribe((x) => {
                                 this.jobs = x;
                         }, err => {
-
+                                console.log('There is an error loading page ', err);
                         })
+        }
+
+        loadMore(e: Event) {
+                e.preventDefault();
+                this.limit += 3;
         }
 
 }

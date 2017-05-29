@@ -1,60 +1,81 @@
 <div class="container">
-        
-                <div class="col-sm-10 col-md-10 col-xs-12 col-sm-offset-1 col-md-offset-1">
-                        <h1> Bello Ya je zari</h1>
-                        <div class="row">
-                                <a routerLink="/add-job" type="button" class="btn btn-sm btn-primary">Create Job</a>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="row">
+                        <h1> Looking for staff ?</h1>
+                </div>
+                <div class="row" style="margin: 10px 0;">
+                                <a routerLink="/add-job" type="button" class="btn btn-primary" style="margin-left: 45%">
+                                  <span class="glyphicon glyphicon-plus-sign"></span> Add Vacancy
+                                </a>
+                </div>
+
+                <div class="row">
+                        <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="search">
                         </div>
-                        <div class="row job-item" *ngFor="let job of jobs">
+                        <div class="col-sm-2 col-xs-12">
+                                <button type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                        
+                        </div>
+                </div>
+                <div class="row job-item" *ngFor="let job of jobs; let i=index">
+                        <div *ngIf="i < limit">
                                 <div class="row">
-                                       <h3> {{job.Title}}</h3>
+                                        <h3> {{job.Title}}</h3>
                                 </div>
                                 <div class="row specification">
                                         <div [innerHTML]="job.JobSpecification">
                                         </div>
                                 </div>
 
-                                <div class="row">
-                 
+                                <div class="row info-row">
+
                                         <div class="col-sm-3 col-xs-12">
-                                                
+
                                                 <div class="info">
-                                                        <span class="glyphicon glyphicon-map-marker"></span> {{job.JobLocation}} |
+                                                        <span class="glyphicon glyphicon-map-marker"></span> {{job.JobLocation}}
+                                                        |
                                                 </div>
                                         </div>
-                                        
+
                                         <div class="col-sm-3 col-xs-12">
-                                                
+
                                                 <div class="info">
-                                                        <span class="glyphicon glyphicon-calendar"></span> {{job.CreatedOn | date}} |
+                                                        <span class="glyphicon glyphicon-calendar"></span> {{job.CreatedOn | date}}
+                                                        |
                                                 </div>
                                         </div>
-                                        
+
                                         <div class="col-sm-3 col-xs-12">
                                                 <div class="info">
-                                                        <span class="glyphicon glyphicon-info-sign"></span> 
-                                                        {{job.JobType}} |
+                                                        <span class="glyphicon glyphicon-info-sign"></span> {{job.JobType}} |
                                                 </div>
                                         </div>
-                                        
+
                                         <div class="col-sm-3 col-xs-12">
                                                 <div class="info">
-                                                        <span class="glyphicon glyphicon-user"></span> 
-                                                        {{job.Employer.Company}}
+                                                        <span class="glyphicon glyphicon-user"></span> {{job.Employer.Company}}
                                                 </div>
                                         </div>
                                 </div>
 
                                 <hr/>
-                        </div>
 
-                      <div class="row">
+                        </div>
+                </div>
+                <div class="row" *ngIf="limit < jobs.length" style="margin:45% 0;">
+                        <button type="button" class="btn" (click)="loadMore($event)">Load More</button>
+                </div>
+                <div class="row">
                         <footer class="footer">
                                 <p>© 2016 Company, Inc.</p>
                         </footer>
-                      </div>  
                 </div>
-        
+        </div>
+
 
 
 </div>
