@@ -1,12 +1,12 @@
 const models = require('../models');
+const encryption = require('../utilities/encryption');
 
-
-exports.getAllVacancies = function (req, res) {
-  models.Job
+exports.getAllEmployers = function(req, res) {
+  models.Employer
     .findAll({
       order: [['CreatedOn', 'DESC']]
     })
-    .then(function (collection) {
+    .then(function(collection) {
       res.status(200).json(collection);
       res.end();
     })
@@ -17,14 +17,14 @@ exports.getAllVacancies = function (req, res) {
     });
 };
 
-exports.getFeaturedVacancies = function (req, res) {
-  models.Job.findAll({
+exports.getActiveEmployers = function(req, res) {
+  models.Employer.findAll({
     where: {
-      FeaturedJob: true,
+      Active: true,
       order: [['CreatedOn', 'DESC']]
     }
   })
-    .then(function (collection) {
+    .then(function(collection) {
       res.status(200).json(collection)
       res.end();
     })
@@ -34,61 +34,44 @@ exports.getFeaturedVacancies = function (req, res) {
     });
 };
 
-exports.createVacancy = function (req, res) {
-  const vacancy = req.body;
-  models.Job.create({
-    Title: vacancy.Title,
-    JobSpecification: vacancy.JobSpecification,
-    JobLocation: vacancy.JobLocation,
-    OfferRelocation: vacancy.OfferRelocation,
-    JobTags: vacancy.JobTags,
-    JobType: vacancy.JobType,
-    FeaturedJob: vacancy.FeaturedJob
+exports.createEmployer = function(req, res) {
+  const employer = req.body;
+  const salt = encryption.createSalt();
+
+  models.Employer.create({
+    FirstName: employer.FirstName,
+    LastName: employer.LastName,
+    Username: employer.Username,
+    Company: employer.Company,
+    active: true,
+    Email: employer.Email,
+    PassHash: encryption.hashPwd(salt, 'password123'),
+    Salt: salt,
+    Token: encryption.getToken(),
+    Contact: employer.Contact,
+    Address: employer.Address,
+    ReceiveAlert: true
   })
-    .then(function () {
-      res.status(200).json({ success: true });
+    .then(function() {
+      res.status(200).json({
+        success: true
+      });
       res.end();
     })
     .catch(err => res.status(400));
 };
 
-exports.updateVacancy = function (req, res) {
-  const vacancy = req.body;
-  models.Job.update(
-    {
-
-      Title: vacancy.Title,
-      JobSpecification: vacancy.JobSpecification,
-      JobLocation: vacancy.JobLocation,
-      OfferRelocation: vacancy.OfferRelocation,
-      JobTags: vacancy.JobTags,
-      JobType: vacancy.JobType,
-      FeaturedJob: vacancy.FeaturedJob
-    },
-    {
-      Where: {
-        id: vacancy.Id
-      }
-    })
-    .then(function (job) {
-      if (job && job.id == vacancy.Id) {
-        return res.status(200).json(job);
-      }
-    })
-    .catch(err => res.status(400))
-};
-
-exports.deleteVacancy = function (req, res) {
-  models.Job.destroy({
+exports.deleteEmployer = function(req, res) {
+  models.Employer.destroy({
     Where: {
       id: req.params.id
     }
   })
-    .then(function (rowDelete) {
+    .then(function(rowDelete) {
       if (rowDelete === 1) {
-        models.Job.findAll({
+        models.Employer.findAll({
           order: [['CreatedOn', 'DESC']]
-        }).then(jobs => res.status(200).json(users))
+        }).then(employers => res.status(200).json(users))
       } else {
         res.status(403);
         res.end();

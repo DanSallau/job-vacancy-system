@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerFirstName.valid || employerFirstName.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="firstnameError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. Firstname cannot be empty.</p>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerLastName.valid || employerLastName.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="lastNameError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. LastName cannot be empty.</p>
@@ -36,12 +36,12 @@
 
             <div class="form-group row">
                 <label for="username" class="col-sm-2 col-xs-12 col-form-label">Username</label>
-                <div class="col-sm-10 col-xs-12">
+                <div class="col-sm-10 col-xs-12 required">
                     <input type="text" class="form-control required" [(ngModel)]="employer.Username" name="username" required #employerUsername="ngModel">
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerUsername.valid || employerUsername.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="usernameError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. Username cannot be empty.</p>
@@ -49,18 +49,17 @@
                 </div>
             </div>
 
-
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-xs-12 col-form-label">Email </label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="email" class="form-control required" maxlength="50" [(ngModel)]="employer.Email" name="email" required #employerEmail="ngModel">
+                    <input type="email" class="form-control required" maxlength="50" [(ngModel)]="employer.Email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #employerEmail="ngModel">
                 </div>
             </div>
-             <div class="form-group row" [hidden]="employerEmail.valid || employerEmail.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+            <div class="form-group row" [hidden]="employerEmail.valid || employerEmail.pristine">
+                <label for="emailError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
-                        <p>*Required field. Email cannot be empty.</p>
+                        <p>*Required field. Email must be valid and not empty.</p>
                     </div>
                 </div>
             </div>
@@ -68,18 +67,19 @@
             <div class="form-group row">
                 <label for="contact" class="col-sm-2 col-xs-12 col-form-label">Contact </label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" [(ngModel)]="employer.Contact" name="contact" required pattern="^[0-9]+$" #employerContact="ngModel">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.Contact" name="contact" required pattern="^[0-9]+$"
+                        #employerContact="ngModel">
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerContact.valid || employerContact.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="contactError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. Contact cannot be empty.</p>
                     </div>
                 </div>
             </div>
-            
+
 
             <div class="form-group row">
                 <label for="address" class="col-sm-2 col-xs-12 col-form-label">Address</label>
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerAddress.valid || employerAddress.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="addressError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. Address cannot be empty.</p>
@@ -103,14 +103,14 @@
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerCompany.valid || employerCompany.pristine">
-                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <label for="companyError" class="col-sm-2 col-xs-12 col-form-label"></label>
                 <div class="col-sm-10 col-xs-12">
                     <div class="alert alert-danger">
                         <p>*Required field. Company Name cannot be empty.</p>
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <label for="contact" class="col-sm-2 col-xs-12 col-form-label">Email alerts </label>
                 <div class="col-sm-10 col-xs-12">
@@ -121,30 +121,186 @@
                 </div>
             </div>
 
+
             <div class="row">
                 <h2> Job Information</h2>
             </div>
-            
+
             <div class="form-group row">
                 <label for="title" class="col-sm-2 col-xs-12 col-form-label">Job Title</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="txtTitle">
+                    <input type="text" class="form-control required" id="txtTitle" [(ngModel)]="job.Title" name="title" required #jobTitle="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="jobTitle.valid || jobTitle.pristine">
+                <label for="titleError" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Title cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="company" class="col-sm-2 col-xs-12 col-form-label">Job Specification</label>
                 <div class="col-sm-10 col-xs-12">
-                    <textarea class="form-control required" id="txtSpecification" rows="3"></textarea>
+                    <textarea class="form-control required" id="txtSpecification" rows="3" [(ngModel)]="job.JobSpecification" name="jobSpecification" required #jobSpecification="ngModel"></textarea>
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="jobSpecification.valid || jobSpecification.pristine">
+                <label for="jobSpecificationError" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Specification cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
-                 <div class="col-sm-2 col-xs-6 col-sm-offset-10">
-                    <button id="btn-save" type="button" class="btn btn-primary"  [disabled]="!frmRef.form.valid" (click)="addJob($event)">
+                <label for="Location" class="col-sm-2 col-xs-12 col-form-label">Job Location</label>
+                <div class="col-sm-10 col-xs-12">
+                    <input type="text" class="form-control required" id="txtLocation" rows="3" [(ngModel)]="job.JobLocation" name="txtLocation" required #jobLocation="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="jobLocation.valid || jobLocation.pristine">
+                <label for="jobLocationError" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Location cannot be empty.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="contact" class="col-sm-2 col-xs-12 col-form-label">Relocation </label>
+                <div class="col-sm-10 col-xs-12">
+                    <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="job.OfferRelocation" name="relocation">
+                                Offers Relocation
+                    </label>
+                </div>
+            </div>
+            
+
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12 required">
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Skills</legend>
+                        <div class="control-group">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Java" (change)="setTag($event)">
+                                                Java
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="C#" (change)="setTag($event)">
+                                                C#
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="JavaScript" (change)="setTag($event)">
+                                                JavaScript
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Perl" (change)="setTag($event)">
+                                                Perl
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Erlang" (change)="setTag($event)">
+                                                Erlang
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="F#" (change)="setTag($event)">
+                                                F#
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Architect" (change)="setTag($event)">
+                                                Architect
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Lead" (change)="setTag($event)">
+                                                Lead
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Testing" (change)="setTag($event)">
+                                                Testing
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Perl" (change)="setTag($event)">
+                                                Perl
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="Erlang" (change)="setTag($event)">
+                                                Erlang
+                                    </label>
+
+                                </div>
+                                <div class="row">
+                                    <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="F#" (change)="setTag($event)">
+                                                F#
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-2 col-xs-6 col-sm-offset-10">
+                    <button id="btn-save" type="button" class="btn btn-primary pull-right" [disabled]="!frmRef.form.valid" (click)="addJob($event)">
                         <span class="glyphicon glyphicon-plus-sign"></span> Save Job
                     </button>
-                 </div>
+                </div>
 
             </div>
 
