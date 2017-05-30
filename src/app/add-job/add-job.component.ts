@@ -16,6 +16,11 @@ export class AddJobComponent implements OnInit {
     ngOnInit() {
       this.employer = <IEmployer>{};
       this.job = <IJob>{};
+      console.log('gyambo ', this.job);
+    }
+
+    addJob(e: Event) {
+      console.log('The added jobs are ', this.employer);
     }
 
 

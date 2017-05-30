@@ -24,5 +24,7 @@ export interface IEmployer {
     LastActive: Date,
     Block: boolean,
     Email: string,
-    Contact: string
+    Contact: string,
+    ReceiveAlert: boolean
+    
 }

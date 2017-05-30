@@ -7,14 +7,45 @@
             <div class="form-group row">
                 <label for="fname" class="col-sm-2 col-xs-12 col-form-label">First name</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="fname" [(ngModel)]="employer.FisrtName">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.FisrtName" name="fname" required #employerFirstName="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="employerFirstName.valid || employerFirstName.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Firstname cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="lname" class="col-sm-2 col-xs-12 col-form-label">Last name</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="lname" [(ngModel)]="employer.LastName">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.LastName" name="lname" required #employerLastName="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="employerLastName.valid || employerLastName.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. LastName cannot be empty.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-xs-12 col-form-label">Username</label>
+                <div class="col-sm-10 col-xs-12">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.Username" name="username" required #employerUsername="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="employerUsername.valid || employerUsername.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Username cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
@@ -22,28 +53,61 @@
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-xs-12 col-form-label">Email </label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="email" class="form-control required" id="email">
+                    <input type="email" class="form-control required" maxlength="50" [(ngModel)]="employer.Email" name="email" required #employerEmail="ngModel">
+                </div>
+            </div>
+             <div class="form-group row" [hidden]="employerEmail.valid || employerEmail.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Email cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="contact" class="col-sm-2 col-xs-12 col-form-label">Contact </label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="contact">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.Contact" name="contact" required pattern="^[0-9]+$" #employerContact="ngModel">
                 </div>
             </div>
+            <div class="form-group row" [hidden]="employerContact.valid || employerContact.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Contact cannot be empty.</p>
+                    </div>
+                </div>
+            </div>
+            
 
             <div class="form-group row">
                 <label for="address" class="col-sm-2 col-xs-12 col-form-label">Address</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="txtAdress">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.Address" name="address" required #employerAddress="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="employerAddress.valid || employerAddress.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Address cannot be empty.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="company" class="col-sm-2 col-xs-12 col-form-label">Company name</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="txtCompany">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.Company" name="company" required #employerCompany="ngModel">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="employerCompany.valid || employerCompany.pristine">
+                <label for="company" class="col-sm-2 col-xs-12 col-form-label"></label>
+                <div class="col-sm-10 col-xs-12">
+                    <div class="alert alert-danger">
+                        <p>*Required field. Company Name cannot be empty.</p>
+                    </div>
                 </div>
             </div>
             
@@ -51,7 +115,7 @@
                 <label for="contact" class="col-sm-2 col-xs-12 col-form-label">Email alerts </label>
                 <div class="col-sm-10 col-xs-12">
                     <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="employer.ReceiveAlert" name="alert">
                                 I would like to receive alert from Ransdad
                     </label>
                 </div>
@@ -77,7 +141,7 @@
 
             <div class="form-group row">
                  <div class="col-sm-2 col-xs-6 col-sm-offset-10">
-                    <button id="btn-save" type="button" class="btn btn-primary"  [disabled]="!frmRef.form.valid">
+                    <button id="btn-save" type="button" class="btn btn-primary"  [disabled]="!frmRef.form.valid" (click)="addJob($event)">
                         <span class="glyphicon glyphicon-plus-sign"></span> Save Job
                     </button>
                  </div>
