@@ -1,13 +1,15 @@
 const models = require('../models');
 
-exports.getAllVacancies = function (req, res) {
+exports.getAllVacancies = function(req, res) {
   models.Job
     .findAll({
-      include: [{ model: models.Employer}],
+      include: [{
+        model: models.Employer
+      }],
       order: [['CreatedOn', 'DESC']]
     })
-    .then(function (collection) {
-      res.status(200).json(collection); 
+    .then(function(collection) {
+      res.status(200).json(collection);
       res.end();
     })
     .catch((err) => {
@@ -17,15 +19,17 @@ exports.getAllVacancies = function (req, res) {
     });
 };
 
-exports.getFeaturedVacancies = function (req, res) {
+exports.getFeaturedVacancies = function(req, res) {
   models.Job.findAll({
-    include: [{ model: models.Employer}],
+    include: [{
+      model: models.Employer
+    }],
     where: {
-      FeaturedJob: true,
-      order: [['CreatedOn', 'DESC']]
-    }
+      FeaturedJob: true
+    },
+    order: [['CreatedOn', 'DESC']]
   })
-    .then(function (collection) {
+    .then(function(collection) {
       res.status(200).json(collection)
       res.end();
     })
@@ -35,8 +39,9 @@ exports.getFeaturedVacancies = function (req, res) {
     });
 };
 
-exports.createVacancy = function (req, res) {
+exports.createVacancy = function(req, res) {
   const vacancy = req.body;
+
   models.Job.create({
     Title: vacancy.Title,
     JobSpecification: vacancy.JobSpecification,
@@ -44,16 +49,72 @@ exports.createVacancy = function (req, res) {
     OfferRelocation: vacancy.OfferRelocation,
     JobTags: vacancy.JobTags,
     JobType: vacancy.JobType,
-    FeaturedJob: vacancy.FeaturedJob
+    FeaturedJob: vacancy.FeaturedJob,
+    EmployerId: vacancy.EmployerId
   })
-    .then(function () {
-      res.status(200).json({ success: true });
+    .then(function() {
+      res.status(200).json({
+        success: true
+      });
       res.end();
     })
-    .catch(err => res.status(400));
+    .catch(err => res.status(400).json(err));
 };
 
-exports.updateVacancy = function (req, res) {
+exports.filterBySearchText = function(req, res) {
+
+  if (req.params.searchText.toLowerCase() === 'all') {
+    //returns all vacancies
+    return getAllVacancies(req, res);
+  } else {
+    models.Job.findAll({
+      where: {
+        $or: [
+          {
+            Title: {
+              $like: '%' + req.params.searchText + '%'
+            }
+          },
+          {
+            Title: {
+              $like: '%' + req.params.searchText
+            }
+          },
+          {
+            Title: {
+              $like: req.params.searchText + '%'
+            }
+          },
+          {
+            JobSpecification: {
+              $like: '%' + req.params.searchText + '%'
+            }
+          },
+          {
+            JobSpecification: {
+              $like: req.params.searchText + '%'
+            }
+          },
+          {
+            JobSpecification: {
+              $like: '%' + req.params.searchText
+            }
+          },
+          {
+            JobLocation: {
+              $like: '%' + req.params.searchText
+            }
+          }
+        ]
+      },
+      order: [['CreatedOn', 'DESC']]
+    }).then(function(collection) {
+      res.status(200).json(collection);
+    });
+  }
+};
+
+exports.updateVacancy = function(req, res) {
   const vacancy = req.body;
   models.Job.update(
     {
@@ -71,7 +132,7 @@ exports.updateVacancy = function (req, res) {
         id: vacancy.Id
       }
     })
-    .then(function (job) {
+    .then(function(job) {
       if (job && job.id == vacancy.Id) {
         return res.status(200).json(job);
       }
@@ -79,13 +140,13 @@ exports.updateVacancy = function (req, res) {
     .catch(err => res.status(400))
 };
 
-exports.deleteVacancy = function (req, res) {
+exports.deleteVacancy = function(req, res) {
   models.Job.destroy({
     Where: {
       id: req.params.id
     }
   })
-    .then(function (rowDelete) {
+    .then(function(rowDelete) {
       if (rowDelete === 1) {
         models.Job.findAll({
           order: [['CreatedOn', 'DESC']]
@@ -100,15 +161,17 @@ exports.deleteVacancy = function (req, res) {
 
 exports.getVacancyById = function(req, res) {
   models.Job.findOne({
-    include: [{ model: models.Employer}],
-    Where:{
+    include: [{
+      model: models.Employer
+    }],
+    Where: {
       id: req.params.id
     }
   })
-  .then(function(job) {
-    return res.status(200).json()
-  })
-  .catch(err => res.status(400))
+    .then(function(job) {
+      return res.status(200).json()
+    })
+    .catch(err => res.status(400))
 };
- 
+
 

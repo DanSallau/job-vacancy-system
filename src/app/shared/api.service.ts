@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { RequestOptionsArgs, Headers, BaseRequestOptions } from '@angular/http';
-import {IJob } from './api.interface';
+import {IJob, IEmployer } from './api.interface';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -26,6 +26,22 @@ export class ApiService {
   // Get all posts from the API
   getAllVacancies(): Observable<Array<IJob>> {
     return this._http.get('/api/vacancies', this.getHeader())
+      .map(res => { return res.json()});
+  }
+
+  searchVacancyByText(text : string) : Observable<Array<IJob>>{
+    return this._http.get(`/api/search/${text}`, this.getHeader())
+      .map(res => { return res.json()});
+  }
+
+  addJob( job:  IJob) : Observable<any> {
+    return this._http.post(`/api/createvacancy`,job, this.getHeader())
+      .map(res => { return res.json()});
+  }
+
+  createEmployer (employer : IEmployer): Observable<IEmployer> {
+    console.log('The sent employer is ', employer);
+    return this._http.post(`/api/createemployer`,employer, this.getHeader())
       .map(res => { return res.json()});
   }
 }

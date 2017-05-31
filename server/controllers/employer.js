@@ -20,9 +20,9 @@ exports.getAllEmployers = function(req, res) {
 exports.getActiveEmployers = function(req, res) {
   models.Employer.findAll({
     where: {
-      Active: true,
-      order: [['CreatedOn', 'DESC']]
-    }
+      Active: true
+    },
+    order: [['CreatedOn', 'DESC']]
   })
     .then(function(collection) {
       res.status(200).json(collection)
@@ -38,32 +38,57 @@ exports.createEmployer = function(req, res) {
   const employer = req.body;
   const salt = encryption.createSalt();
 
-  models.Employer.create({
-    FirstName: employer.FirstName,
-    LastName: employer.LastName,
-    Username: employer.Username,
-    Company: employer.Company,
-    active: true,
-    Email: employer.Email,
-    PassHash: encryption.hashPwd(salt, 'password123'),
-    Salt: salt,
-    Token: encryption.getToken(),
-    Contact: employer.Contact,
-    Address: employer.Address,
-    ReceiveAlert: true
+  models.Employer.findOne({
+    where: {
+      $or: [
+        {
+          Username: {
+            $eq: employer.Username
+          }
+        },
+        {
+          Email: {
+            $eq: employer.Email
+          }
+        }
+      ]
+    }
   })
-    .then(function() {
-      res.status(200).json({
-        success: true
-      });
-      res.end();
+    .then(function(company) {
+      if (company !== null) {
+        //Return employer if it exist
+        res.status(200).json(company);
+      } else {
+        //create new employer if one doesnt exist
+        models.Employer.create({
+          FirstName: employer.FirstName,
+          LastName: employer.LastName,
+          Username: employer.Username,
+          Company: employer.Company,
+          active: true,
+          Email: employer.Email,
+          PassHash: encryption.hashPwd(salt, 'password123'),
+          Salt: salt,
+          Token: encryption.getToken(),
+          Contact: employer.Contact,
+          Address: employer.Address,
+          ReceiveAlert: employer.ReceiveAlert
+        })
+          .then(function(user) {
+            res.status(200).json(user);
+            res.end();
+          })
+          .catch(err => res.status(400));
+      }
     })
-    .catch(err => res.status(400));
+    .catch(err => res.status(400))
+
+
 };
 
 exports.deleteEmployer = function(req, res) {
   models.Employer.destroy({
-    Where: {
+    where: {
       id: req.params.id
     }
   })

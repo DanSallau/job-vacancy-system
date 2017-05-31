@@ -1,13 +1,16 @@
 <div class="container">
     <div class="col-sm-12 col-md-12 col-xs-12">
         <div class="row">
+                        <h1><a href="/"> Looking for staff ? </a></h1>
+                </div>
+        <div class="row">
             <h2> Contact Information</h2>
         </div>
         <form id="job-form" *ngIf="job" #frmRef="ngForm" novalidate="novalidate">
             <div class="form-group row">
                 <label for="fname" class="col-sm-2 col-xs-12 col-form-label">First name</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" [(ngModel)]="employer.FisrtName" name="fname" required #employerFirstName="ngModel">
+                    <input type="text" class="form-control required" [(ngModel)]="employer.FirstName" name="fname" required #employerFirstName="ngModel">
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerFirstName.valid || employerFirstName.pristine">
@@ -52,7 +55,8 @@
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-xs-12 col-form-label">Email </label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="email" class="form-control required" maxlength="50" [(ngModel)]="employer.Email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #employerEmail="ngModel">
+                    <input type="email" class="form-control required" maxlength="50" [(ngModel)]="employer.Email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                        #employerEmail="ngModel">
                 </div>
             </div>
             <div class="form-group row" [hidden]="employerEmail.valid || employerEmail.pristine">
@@ -144,7 +148,8 @@
             <div class="form-group row">
                 <label for="company" class="col-sm-2 col-xs-12 col-form-label">Job Specification</label>
                 <div class="col-sm-10 col-xs-12">
-                    <textarea class="form-control required" id="txtSpecification" rows="3" [(ngModel)]="job.JobSpecification" name="jobSpecification" required #jobSpecification="ngModel"></textarea>
+                    <textarea class="form-control required" id="txtSpecification" rows="3" [(ngModel)]="job.JobSpecification" name="jobSpecification"
+                        required #jobSpecification="ngModel"></textarea>
                 </div>
             </div>
             <div class="form-group row" [hidden]="jobSpecification.valid || jobSpecification.pristine">
@@ -159,15 +164,27 @@
             <div class="form-group row">
                 <label for="Location" class="col-sm-2 col-xs-12 col-form-label">Job Location</label>
                 <div class="col-sm-10 col-xs-12">
-                    <input type="text" class="form-control required" id="txtLocation" rows="3" [(ngModel)]="job.JobLocation" name="txtLocation" required #jobLocation="ngModel">
+                    <select ngModel class="form-control" name="txtLocation" id="txtLocation" required #jobLocation [(ngModel)]="job.JobLocation">
+                        <option value="KL" selected="selected">Kuala Lumpur</option>
+                        <option value="SL">Selangor</option>
+                    </select>
                 </div>
             </div>
-            <div class="form-group row" [hidden]="jobLocation.valid || jobLocation.pristine">
-                <label for="jobLocationError" class="col-sm-2 col-xs-12 col-form-label"></label>
+
+            <div class="form-group row">
+                <label for="type" class="col-sm-2 col-xs-12 col-form-label">Job Type</label>
                 <div class="col-sm-10 col-xs-12">
-                    <div class="alert alert-danger">
-                        <p>*Required field. Location cannot be empty.</p>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" class="radio" [(ngModel)]="job.JobType" name="optType" #jobType="ngModel" value="Contract" required> Contract
+                        </label>
                     </div>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" class="radio" [(ngModel)]="job.JobType" name="optType" #jobType="ngModel" value="Permanent" required> Permanent
+                        </label>
+                    </div>
+                    
                 </div>
             </div>
 
@@ -180,7 +197,7 @@
                     </label>
                 </div>
             </div>
-            
+
 
             <div class="form-group row">
                 <label for="username" class="col-sm-2 col-xs-12 col-form-label"></label>

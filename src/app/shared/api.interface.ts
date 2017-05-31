@@ -11,6 +11,7 @@ export interface IJob {
     CreatedOn: Date,
     FeaturedJob: boolean,
     Active: boolean,
+    EmployerId: number,
     Employer: IEmployer
 }
 
