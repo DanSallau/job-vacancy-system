@@ -5,7 +5,6 @@ var path = require("path");
 var Sequelize = require("sequelize");
 var env = process.env.NODE_ENV || "developement";
 var config = require('../config/config.js')[env];
-//var sequelize = new Sequelize('postgres://nuru:XY3f8FlsD4oL@localhost:5432/hantsitvforum_db', { dialect: 'postgres', protocol: 'postgres' })
 
 var sequelize = new Sequelize(config.database, config.username, config.password, {
   host: config.host,

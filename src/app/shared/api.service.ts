@@ -40,7 +40,7 @@ export class ApiService {
   }
 
   createEmployer (employer : IEmployer): Observable<IEmployer> {
-    console.log('The sent employer is ', employer);
+    
     return this._http.post(`/api/createemployer`,employer, this.getHeader())
       .map(res => { return res.json()});
   }

@@ -10,6 +10,7 @@ api.delete('/deletevacancy/:id', vacancies.deleteVacancy);
 api.get('/vacancy/:id', vacancies.getVacancyById);
 api.post('/createvacancy', vacancies.createVacancy);
 api.get('/search/:searchText', vacancies.filterBySearchText);
+api.get('/search', vacancies.getAllVacancies);
 
 api.post('/createemployer', employers.createEmployer);
 api.get('/employers', employers.getAllEmployers);

@@ -11,7 +11,6 @@ exports.getAllEmployers = function(req, res) {
       res.end();
     })
     .catch((err) => {
-      console.log(err);
       res.status(400);
       res.end();
     });
@@ -57,7 +56,7 @@ exports.createEmployer = function(req, res) {
     .then(function(company) {
       if (company !== null) {
         //Return employer if it exist
-        res.status(200).json(company);
+        return res.status(200).json(company);
       } else {
         //create new employer if one doesnt exist
         models.Employer.create({

@@ -45,10 +45,10 @@ models.sequelize.sync({
         }
       })
       .catch(function(err) {
-        console.log('the first error is', err);
+        console.log('Error adding employers', err);
       });
   })
   .then(() => {
     server.listen(port, () => console.log(`API running on localhost:${port}`));
   })
-  .catch((err) => console.log('There is an error', err))
+  .catch((err) => console.log('There is an error with sequelize', err))

@@ -1,5 +1,4 @@
-var rootPath = require('../../root');
-console.log('the tootpath is now', rootPath);
+
 module.exports = {
     developement: {
         db: 'postgres://nuru:@localhost:5432/nairamarketdb',
@@ -8,7 +7,7 @@ module.exports = {
         username: "nuru",
         password: 'XY3f8FlsD4oL',
         database: "hantsitvforum_db",
-        dbPort: 5433,
+        dbPort: 5432,
         dialect: "postgres"
 
     },

@@ -62,8 +62,8 @@ exports.createVacancy = function(req, res) {
 };
 
 exports.filterBySearchText = function(req, res) {
-
-  if (req.params.searchText.toLowerCase() === 'all') {
+    console.log('The console log comments ', req.params.searchText);
+  if (req.params.searchText.toLowerCase() === 'all' || !req.params.searchText) {
     //returns all vacancies
     return getAllVacancies(req, res);
   } else {
@@ -110,6 +110,7 @@ exports.filterBySearchText = function(req, res) {
       order: [['CreatedOn', 'DESC']]
     }).then(function(collection) {
       res.status(200).json(collection);
+      res.end();
     });
   }
 };
@@ -118,7 +119,6 @@ exports.updateVacancy = function(req, res) {
   const vacancy = req.body;
   models.Job.update(
     {
-
       Title: vacancy.Title,
       JobSpecification: vacancy.JobSpecification,
       JobLocation: vacancy.JobLocation,

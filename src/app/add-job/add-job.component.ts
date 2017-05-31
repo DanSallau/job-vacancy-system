@@ -31,7 +31,7 @@ export class AddJobComponent implements OnInit {
     this.service
       .createEmployer(this.employer)
       .subscribe(x => {
-        console.log('the employer is ', x);
+      
         this.job.EmployerId = x.id
 
         this.service
@@ -48,15 +48,14 @@ export class AddJobComponent implements OnInit {
   }
 
   setTag(e: Event) {
-  
-    const index = array.indexOf(e.target['value']);
 
     if(e.target['checked'] === true) {
       //add when checked
       this.tags.push(e.target['value']);
     } else {
       //remove when unchecked
-      array.splice(index, 1);
+      const index = this.tags.indexOf(e.target['value']);
+      this.tags.splice(index, 1);
     }
   }
 
