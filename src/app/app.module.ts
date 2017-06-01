@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule, enableProdMode }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -8,6 +8,7 @@ import { AppComponent }  from './app.component';
 import {ApiService} from './shared/api.service';
 import {AppRoutingModule} from './app-routing.module';
 
+enableProdMode();
 @NgModule({
   imports:      [ BrowserModule,FormsModule,HttpModule, AppRoutingModule ],
   declarations: [ AppComponent, JobVacancyComponent, AddJobComponent],
