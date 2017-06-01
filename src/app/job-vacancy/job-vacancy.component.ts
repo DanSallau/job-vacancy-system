@@ -33,7 +33,7 @@ export class JobVacancyComponent implements OnInit {
         }
 
         SearchByText(e: Event) {
-                console.log('The search text is ', this.searchText);
+                
                 this.service
                         .searchVacancyByText(this.searchText)
                         .subscribe((x) => {

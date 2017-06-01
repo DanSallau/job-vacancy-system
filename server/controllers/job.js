@@ -13,7 +13,6 @@ exports.getAllVacancies = function(req, res) {
       res.end();
     })
     .catch((err) => {
-      console.log(err);
       res.status(400);
       res.end();
     });
@@ -62,12 +61,15 @@ exports.createVacancy = function(req, res) {
 };
 
 exports.filterBySearchText = function(req, res) {
-    console.log('The console log comments ', req.params.searchText);
+
   if (req.params.searchText.toLowerCase() === 'all' || !req.params.searchText) {
     //returns all vacancies
     return getAllVacancies(req, res);
   } else {
     models.Job.findAll({
+      include: [{
+        model: models.Employer
+      }],
       where: {
         $or: [
           {

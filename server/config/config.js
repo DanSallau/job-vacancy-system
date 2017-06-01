@@ -7,7 +7,7 @@ module.exports = {
         username: "nuru",
         password: 'XY3f8FlsD4oL',
         database: "hantsitvforum_db",
-        dbPort: 5432,
+        dbPort: 5433,
         dialect: "postgres"
 
     },
