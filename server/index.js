@@ -28,24 +28,31 @@ server.on('close', () => {
   models.sequelize.close();
 });
 models.sequelize.sync({
-  force: true
+  force: false
 })
   .then(function(schema) {
     // Table created
-    return models.Employer
-      .bulkCreate(bulkData(1)['employer'])
-      .then(function() {
-        return models.Employer.findOne();
-      })
-      .then(function(employer) {
-        if (employer) {
-          models.Job
-            .bulkCreate(bulkData(employer.id)['job'])
-            .catch(err => console.log(err))
-        }
-      })
+    models.Employer.findAll().then(function(result) {
+      if (result === null || result.length === 0) {
+        return models.Employer
+          .bulkCreate(bulkData(1)['employer'])
+          .then(function() {
+            return models.Employer.findOne();
+          })
+          .then(function(employer) {
+            if (employer) {
+              models.Job
+                .bulkCreate(bulkData(employer.id)['job'])
+                .catch(err => console.log(err))
+            }
+          })
+          .catch(function(err) {
+            console.log('Error adding employers', err);
+          });
+      }
+    })
       .catch(function(err) {
-        console.log('Error adding employers', err);
+        console.log('error:', err);
       });
   })
   .then(() => {
